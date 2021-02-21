@@ -1,31 +1,28 @@
-var tin = new Object();
+var tin = null;
 
-$(document).ready(function() {
+$(document).ready(function () {
 
-    tin.fresh = function(canvas) {
-        canvas.data;
-    };
-
-    tin.fullscreen = function(canvas) {
-        resizedata = function() {
-            canvas.data.attr('width', $(window).get(0).innerWidth);
-            canvas.data.attr('height', $(window).get(0).innerHeight);
-            canvas.height = canvas.data.height();
-            canvas.width = canvas.data.width();
-        };
-        $(window).resize(resizedata);
-        resizedata(canvas);
-    };
-
-    tin.newcanvas = function(id) {
+    tin = function (id) {
         _this = this;
         this.id = id;
         this.data = $('#' + id);
         this.height = this.data.height();
         this.width = this.data.width();
-        this.fullscreen = function(canvas = _this) {
-            console.log(canvas);
-            tin.fullscreen(canvas);
+        this.isfullscreen = 0;
+        this.hasfullscreen = 0;
+        this.unfullscreen = function () { this.isfullscreen = 0; };
+        this.fullscreen = function (callback = function () { }) {
+            function resizedata() {
+                if (!_this.isfullscreen) return;
+                _this.data.attr('width', $(window).get(0).innerWidth);
+                _this.data.attr('height', $(window).get(0).innerHeight);
+                _this.height = _this.data.height();
+                _this.width = _this.data.width();
+            };
+            if (!_this.hasfullscreen) $(window).resize(resizedata);
+            _this.hasfullscreen = _this.isfullscreen = 1;
+            resizedata();
+            callback();
         };
     };
 
