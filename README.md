@@ -2,7 +2,7 @@
 
 TinCore is a javascript project to help progarammer use canvas object better.
 
-There is only one version of TinCore, so it is simple and crude.
+There are only beta versions of TinCore, so it is simple and crude.
 
 TinCore will keep updating its files, and it's unstabled, so you should upgrade TinCore carefully.
 
